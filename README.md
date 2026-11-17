@@ -19,11 +19,46 @@ Queuing are the most frequently encountered problems in everyday life. For examp
 
 ## Experiment:
 
+<img width="1007" height="610" alt="image" src="https://github.com/user-attachments/assets/e94fb43c-b64e-4a1b-9c45-f7ebeb8cc90c" />
+
 
 ## Program
-
+```
+import math
+arr_time=float(input("Enter the mean inter arrival time of objects from Feeder (in secs): "))
+ser_time=float(input("Enter the mean  inter service time of Lathe Machine (in secs) :  "))
+Robot_time=float(input("Enter the Additional time taken for the Robot (in secs) :  "))
+c=int(input("Number of service centre :  "))
+lam=1/arr_time
+mu=1/(ser_time+Robot_time)
+print("--------------------------------------------------------------")
+print("Multiple Server with Infinite Capacity - (M/M/c):(oo/FIFO)")
+print("--------------------------------------------------------------")
+print(f"The mean arrival rate per second : {lam:.2f}")
+print(f"The mean service rate per second : {mu:.2f}")
+rho=lam/(c*mu)
+sum=(lam/mu)**c*(1/(1-rho))/math.factorial(c)
+for i in range(0,c):
+    sum=sum+(lam/mu)**i/math.factorial(i)
+P0=1/sum
+if (rho<1):
+    Lq=(P0/math.factorial(c))*(1/c)*(lam/mu)**(c+1)/(1-rho)**2
+    Ls=Lq+lam/mu
+    Ws=Ls/lam
+    Wq=Lq/lam
+    print(f"Average number of objects in the system : {Ls:.2f}")
+    print(f"Average number of objects in the conveyor : {Lq:.2f}")
+    print(f"Average waiting time of an object in the system : {Ws:.2f} secs")
+    print(f"Average waiting time of an object in the conveyor : {Wq:.2f} secs")
+    print(f"Probability that the system is busy : {rho:.2f}")
+    print(f"Probability that the system is empty : {(1-rho):.2f}")
+else:
+    print("Warning! Objects Over flow will happen in the conveyor")
+print("--------------------------------------------------------------")
+```
 
 ## Output :
+<img width="847" height="363" alt="image" src="https://github.com/user-attachments/assets/5cb52180-f24b-42a9-bdc0-0307b43659d8" />
 
 ## Result : 
-
+Thus the average number of materials in the system and conveyor, waiting time of each material in the system and conveyor is found successfully. 
